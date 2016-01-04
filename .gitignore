@@ -1,0 +1,15 @@
+# Ignore .env
+.env
+
+# Ignore bundler config.
+/.bundle
+
+# Ignore all logfiles and tempfiles.
+/log/*
+!/log/.keep
+
+# Ignore todo
+TODO.md
+
+# Ignore Mac Files
+.DS_Store
