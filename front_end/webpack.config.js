@@ -1,11 +1,20 @@
 module.exports = {
   cache: true,
-  entry: './index',
+  entry: './src/index',
   output: {
-    filename: 'build.js'
+    path: __dirname + '/build/',
+    publicPath: '/assets/',
+    filename: 'main.js',
   },
   devtool: false,
   module: {
+    preLoaders: [
+      {
+        test: /\.js$/, // include .js files
+        exclude: /node_modules/, // exclude any and all files in the node_modules folder
+        loader: 'jshint-loader',
+      }
+    ],
     loaders: [
       {
         test: /\.js$/,
@@ -19,5 +28,18 @@ module.exports = {
         loaders: ["style", "css", "sass"]
       }
     ]
-  }
+  },
+  eslint: {
+    "ecmaFeatures": {
+      "jsx": true,
+    },
+    "env": {
+      "browser": true,
+      "node": true,
+      "es6": true
+    },
+    "rules": {
+      "no-unused-vars": [1]
+    }
+  },
 };
