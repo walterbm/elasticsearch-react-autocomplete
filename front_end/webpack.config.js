@@ -13,8 +13,8 @@ module.exports = {
   module: {
     preLoaders: [
       {
-        test: /\.js$/, // include .js files
-        exclude: /node_modules/, // exclude any and all files in the node_modules folder
+        test: /\.js$/,
+        exclude: /node_modules/,
         loader: 'jshint-loader',
       }
     ],
@@ -35,8 +35,12 @@ module.exports = {
         loaders: ['style', 'css', 'sass']
       },
       {
-        test: /\.(png|jpg|gif)$/,
+        test: /\.(png|jpg|gif|svg)$/,
         loader: 'file-loader?name=img/img-[hash:6].[ext]'
+      },
+      {
+        test: /\.(woff2?|ico|ttf|eot)$/,
+        loader: 'file-loader?name=font/font-[hash:6].[ext]'
       }
     ]
   }
