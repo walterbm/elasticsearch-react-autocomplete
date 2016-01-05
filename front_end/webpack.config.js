@@ -24,22 +24,13 @@ module.exports = {
         }
       },
       {
+        test: /\.css$/,
+        loaders: ['style','css']
+      },
+      {
         test: /\.scss$/,
-        loaders: ["style", "css", "sass"]
+        loaders: ['style', 'css', 'sass']
       }
     ]
-  },
-  eslint: {
-    "ecmaFeatures": {
-      "jsx": true,
-    },
-    "env": {
-      "browser": true,
-      "node": true,
-      "es6": true
-    },
-    "rules": {
-      "no-unused-vars": [1]
-    }
-  },
+  }
 };
