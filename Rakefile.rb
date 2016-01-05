@@ -1,4 +1,4 @@
 
-task :upload do
-  ruby "lib/uploader.rb"
+task :index do
+  ruby "lib/indexer.rb"
 end

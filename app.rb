@@ -15,7 +15,7 @@ class ElasticSearchApp < Sinatra::Base
       body: {
         query: {
           match: {
-            title: params_query
+            body: params_query
           }
         }
       }
