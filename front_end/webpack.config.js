@@ -1,8 +1,11 @@
+var webpack = require('webpack'),
+    path = require('path');
+
 module.exports = {
   cache: true,
   entry: './src/index',
   output: {
-    path: __dirname + '/build/',
+    path: path.join(__dirname,'/build/'),
     publicPath: '/assets/',
     filename: 'main.js',
   },
@@ -25,11 +28,15 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loaders: ['style','css']
+        loaders: ['style','css', 'autoprefixer']
       },
       {
         test: /\.scss$/,
         loaders: ['style', 'css', 'sass']
+      },
+      {
+        test: /\.(png|jpg|gif)$/,
+        loader: 'file-loader?name=img/img-[hash:6].[ext]'
       }
     ]
   }
