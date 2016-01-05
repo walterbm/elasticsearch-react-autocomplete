@@ -11,5 +11,11 @@
 # Ignore todo
 TODO.md
 
+# Ignore node modules
+/front_end/node_modules/
+
+# Ignore main compiled javascript
+/front_end/build.js
+
 # Ignore Mac Files
 .DS_Store

@@ -2,9 +2,9 @@ module.exports = {
   cache: true,
   entry: './index',
   output: {
-    filename: 'browser-bundle.js'
+    filename: 'build.js'
   },
-  devtool: 'source-map',
+  devtool: false,
   module: {
     loaders: [
       {
