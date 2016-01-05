@@ -1,10 +1,10 @@
-# A sample Gemfile
+# Gemfile
 source "https://rubygems.org"
 
 gem "sinatra"
 gem "thin"
 gem "elasticsearch"
-gem 'dotenv'
-
+gem "dotenv"
 gem "pry"
 gem "mysql2"
+gem "rake"

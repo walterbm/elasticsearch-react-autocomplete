@@ -24,14 +24,6 @@ class ElasticSearchApp < Sinatra::Base
   end
 
   post '/' do
-    @@client.index(
-      index: 'enron',
-      type: 'my-document',
-      id: 1,
-      body: {
-        title: params_doc
-      }
-    )
     "worked"
   end
 
