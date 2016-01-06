@@ -2,7 +2,7 @@
 source "https://rubygems.org"
 
 gem "sinatra"
-gem "thin"
+gem "shotgun"
 gem "elasticsearch"
 gem "dotenv"
 gem "pry"

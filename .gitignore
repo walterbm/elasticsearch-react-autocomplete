@@ -15,7 +15,7 @@ TODO.md
 /front_end/node_modules/
 
 # Ignore main compiled javascript
-/front_end/build.js
+/front_end/build/
 
 # Ignore Mac Files
 .DS_Store
