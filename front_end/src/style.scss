@@ -2,16 +2,25 @@
 
 #root {
   width: 100%;
-  max-width: 800px;
+  max-width: 900px;
   margin: 10% auto 2% auto;
 }
 a {
-  color: grey;
+  color: #181919;
 }
 .topcoat-text-input {
   width: 100%;
 }
 li.hover {
-  background: #def440;
+  background: lighten(#288edf,20%);
   font-weight: bold;
+}
+
+.topcoat-list__container {
+  border-top: none;
+}
+
+.typeahead {
+  width: 700px;
+  display: inline-block;
 }

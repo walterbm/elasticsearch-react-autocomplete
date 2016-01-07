@@ -17,29 +17,36 @@ class ElasticSearchApp < Sinatra::Base
 
   get '/' do
     @@client.indices.refresh(index: 'enron')
-    "I'm the API"
-    # result = @@client.search(
-    #   index: 'enron',
-    #   body: {
-    #     query: {
-    #       match: {
-    #         body: params_query
-    #       }
-    #     }
-    #   }
-    # )
-    # result.to_json
+    "This is the Sinatra ElasticSearch API"
   end
 
-  post '/' do
+  # get '/:q' do
+  #   params_query
+  #   binding.pry
+  #   "I get you records".to_json
+  # end
+
+  post '/search' do
     query = JSON.parse(request.body.read)
-    "worked".to_json
+
+    es_result = @@client.search(
+      index: 'enron',
+      body: {
+        query: {
+          match: {
+            body: query["query"]
+          }
+        }
+      }
+    )
+
+    search_results = es_result["hits"]["hits"].map do |result|
+      result["_source"]["subject"]
+    end
+
+    search_results.to_json
   end
 
-  get '/:id' do
-    @@client.indices.refresh(index: 'enron')
-    "I get you records"
-  end
 
   post '/auto' do
     autocomplete = JSON.parse(request.body.read)
@@ -64,7 +71,7 @@ class ElasticSearchApp < Sinatra::Base
         }
       }
     )
-    
+
     sender_options = es_result["sender"].first["options"].map do |option|
       option["text"]
     end
@@ -73,9 +80,9 @@ class ElasticSearchApp < Sinatra::Base
       option["text"]
     end
 
-    options = sender_options + subject_options
+    autocomplete_options = sender_options + subject_options
 
-    options.to_json
+    autocomplete_options.to_json
   end
 
   options '*' do
@@ -86,10 +93,6 @@ class ElasticSearchApp < Sinatra::Base
 
     def params_query
       params.has_key?("q")? params[:q] : ''
-    end
-
-    def params_doc
-      params[:content]
     end
 
 end

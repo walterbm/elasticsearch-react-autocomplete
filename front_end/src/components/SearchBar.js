@@ -6,8 +6,9 @@ export default class SearchBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: "",
-      autocomplete: []
+      query: "",
+      autocomplete: [],
+      results: []
     };
   }
 
@@ -15,6 +16,10 @@ export default class SearchBar extends React.Component {
     let self = this;
     let query = e.target.value;
     let url = this.props.url + 'auto';
+
+    self.setState({
+      results: []
+    });
 
     let xhr = new XMLHttpRequest();
     xhr.open('POST', url, true);
@@ -36,38 +41,63 @@ export default class SearchBar extends React.Component {
     });
 
   }
+  handleSelection(selection) {
+    let self = this;
+    let query = selection;
+    let url = this.props.url + query;
 
-  handleSearch(e) {
-    e.preventDefault();
-    debugger;
-    // let self = this;
-    // let query = this.state.query;
-    // let url = this.props.url;
-    //
     // let xhr = new XMLHttpRequest();
-    // xhr.open('POST', url, true);
+    // xhr.open('GET', url, true);
     // xhr.setRequestHeader('Content-Type', 'application/json');
     // xhr.onload = function() {
     //   if (xhr.status === 200) {
     //     self.setState({
-    //       query: JSON.parse(xhr.response)
+    //       result: JSON.parse(xhr.response)
     //     });
     //   } else {
     //     console.error(url, xhr.status);
     //   }
     // };
-    // xhr.send(JSON.stringify({
-    //     query: query,
-    // }));
+  }
+  handleSearch() {
+    let self = this;
+    let query = this.state.query;
+    let url = this.props.url + "search";
+
+    self.setState({
+      autocomplete: []
+    });
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', url, true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onload = function() {
+      if (xhr.status === 200) {
+        self.setState({
+          results: JSON.parse(xhr.response)
+        });
+      } else {
+        console.error(url, xhr.status);
+      }
+    };
+    xhr.send(JSON.stringify({
+        query: query,
+    }));
   }
 
   render() {
     return (
       <div className="searchBar">
+        <button
+          onClick={this.handleSearch.bind(this)}
+          className="topcoat-button--cta">
+          Search!
+        </button>
         <ReactTypeahead.Typeahead
           placeholder="Start Typing..."
-          onChange={this.handleQueryChange.bind(this)}
           options={this.state.autocomplete}
+          onChange={this.handleQueryChange.bind(this)}
+          onOptionSelected={this.handleSelection.bind(this)}
           customClasses={{
             typeahead: "topcoat-list",
             input: "topcoat-text-input",
@@ -75,11 +105,15 @@ export default class SearchBar extends React.Component {
             listItem: "topcoat-list__item",
           }}
         />
-        <input
-          type="submit"
-          value="SEARCH"
-          onClick={this.handleSearch.bind(this)}
-        />
+        <div>
+          <ul className="topcoat-list__container">
+            {this.state.results.map(function(result, i){
+              return (
+                <li key={i} className="topcoat-list__item">{result}</li>
+              )
+            })}
+          </ul>
+        </div>
       </div>
     );
   }
