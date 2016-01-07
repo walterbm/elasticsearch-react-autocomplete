@@ -11,13 +11,13 @@ class ElasticSearchApp < Sinatra::Base
   before do
     content_type :json
     headers 'Access-Control-Allow-Origin' => '*',
-            'Access-Control-Allow-Methods' => ['OPTIONS', 'GET', 'POST'],
+            'Access-Control-Allow-Methods' => ['OPTIONS', 'GET', 'POST','HEAD','GET','PUT','DELETE'],
             'Access-Control-Allow-Headers' => 'Content-Type'
   end
 
   get '/' do
     @@client.indices.refresh(index: 'enron')
-    'wait'
+    "I'm the API"
     # result = @@client.search(
     #   index: 'enron',
     #   body: {
@@ -36,23 +36,49 @@ class ElasticSearchApp < Sinatra::Base
     "worked".to_json
   end
 
+  get '/:id' do
+    @@client.indices.refresh(index: 'enron')
+    "I get you records"
+  end
+
   post '/auto' do
-    # autocomplete = JSON.parse(request.body.read)
-    result = @@client.suggest(
+    autocomplete = JSON.parse(request.body.read)
+
+    es_result = @@client.suggest(
       index: 'enron',
       body: {
-        autocomplete_suggest: {
-          text: 'enr',
+        sender: {
+          text: autocomplete["query"],
           completion: {
             field: "sender_suggest"
+          }
+        },
+        subject: {
+          text: autocomplete["query"],
+          completion: {
+            field: "subject_suggest",
+            fuzzy: {
+              fuzziness: 2
+            }
           }
         }
       }
     )
-    result.to_json
+    
+    sender_options = es_result["sender"].first["options"].map do |option|
+      option["text"]
+    end
+
+    subject_options = es_result["subject"].first["options"].map do |option|
+      option["text"]
+    end
+
+    options = sender_options + subject_options
+
+    options.to_json
   end
 
-  options '/*' do
+  options '*' do
     200
   end
 

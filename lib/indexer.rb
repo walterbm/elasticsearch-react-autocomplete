@@ -1,6 +1,6 @@
 require_relative '../config/environment'
 
-class DocumentUploader
+class DocumentIndexer
 
   def initialize
     begin
@@ -82,4 +82,4 @@ class DocumentUploader
   end
 end
 
-DocumentUploader.new
+DocumentIndexer.new

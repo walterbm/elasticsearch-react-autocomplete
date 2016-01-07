@@ -1,5 +1,17 @@
-$green: red;
+@import url(https://cdnjs.cloudflare.com/ajax/libs/topcoat/0.8.0/css/topcoat-mobile-light.min.css);
 
-#root{
-  color: $green;
+#root {
+  width: 100%;
+  max-width: 800px;
+  margin: 10% auto 2% auto;
+}
+a {
+  color: grey;
+}
+.topcoat-text-input {
+  width: 100%;
+}
+li.hover {
+  background: #def440;
+  font-weight: bold;
 }

@@ -41,6 +41,7 @@ module.exports = {
       // compile all javascript files using the babel-loader module
       {
         test: /\.js$/,
+        exclude: /node_modules/,
         loader: 'babel-loader',
         // preset determine which babel libraries to use
         query: {
