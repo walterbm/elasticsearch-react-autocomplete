@@ -1,18 +1,20 @@
-!SLIDE
+!SLIDE center
 # ElasticSearch #
-
-!SLIDE
-ElasticSearch is a real-time distributed search and analytics document-store and engine.
-
-Runs on the JVM
-
-Interact Through a RESTful API
+![ElasticSearch](http://assets.wildbit.com/postmark/blog/images/logo-elastic.png)
 
 !SLIDE bullets
-# Common uses for ElasticSearch #
+# Overview #
+
+* ElasticSearch is a real-time distributed document-store, search, and analytics engine.
+* Runs on the JVM
+* Interfaces through a RESTful API
+* JSON data
+
+!SLIDE bullets
+# Common uses: #
 
 * full-text search
-* structured search (e.g. coordinate search)
+* structured search (e.g. geolocation search)
 * analytics
 
 !SLIDE bullets
@@ -24,34 +26,50 @@ Interact Through a RESTful API
 * Kickstarter
 
 !SLIDE bullets
-# Process #
+# Process: #
 
 * Mapping
 * Indexing
 * QueryDSL
 
 !SLIDE
-.notes notes for my slide
+# Mapping #
 
-	@@@ ruby
-    result = client.suggest(
-      index: 'enron',
-      body: {
-        autocomplete_suggest: {
-          text: 'enr',
-          completion: {
-            field: "sender_suggest"
-          }
-        }
-      }
-    )
+The "schema" used by ElasticSearch.
 
+Can either be created before indexing (similar to migrations)
+Or inferred automatically when the first document is index
 
 !SLIDE
-.notes notes for my slide
+# QueryDSL #
 
-	@@@ javascript handleQueryChange(e){
-    this.setState({
-      query: e.target.value
-    });
-  }
+Interfaces with ElasticSearch through their own proprietary querying language
+
+!SLIDE
+# Create #
+`POST` to `http://localhost:9200/{index}/{resource}`
+
+	@@@ json
+	{
+		"sender": "walter@fuzz.com",
+		"subject": "Fuzz Demo",
+		"body": "croissant"
+	}
+
+!SLIDE
+# Retrieve #
+`GET` to `http://localhost:9200/{index}/{resource}/{id}`
+
+!SLIDE
+# Update #
+`PUT` to `http://localhost:9200/{index}/{resource}/{id}`
+
+	@@@ json
+	{
+		"sender": "walter@fuzz.com",
+		"subject": "Fuzz Updated",
+		"body": "buttery croissant"
+	}
+
+!SLIDE
+# Demo #

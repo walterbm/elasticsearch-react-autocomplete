@@ -1,19 +1,27 @@
 @import url(https://cdnjs.cloudflare.com/ajax/libs/topcoat/0.8.0/css/topcoat-mobile-light.min.css);
+@import url(https://fonts.googleapis.com/css?family=Permanent+Marker:400);
 
+h1 {
+  font-family: 'Permanent Marker', cursive;
+  text-align: center;
+  font-size: 60px;
+  margin-top: 3%;
+  color: #181919;
+}
 #root {
   width: 100%;
   max-width: 900px;
-  margin: 10% auto 2% auto;
+  margin: 3% auto 2% auto;
 }
 a {
   color: #181919;
+  text-decoration: none;
 }
 .topcoat-text-input {
   width: 100%;
 }
 li.hover {
   background: lighten(#288edf,20%);
-  font-weight: bold;
 }
 
 .topcoat-list__container {
@@ -21,6 +29,6 @@ li.hover {
 }
 
 .typeahead {
-  width: 700px;
+  width: 85%;
   display: inline-block;
 }

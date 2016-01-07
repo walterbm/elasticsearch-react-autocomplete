@@ -20,7 +20,7 @@ class DocumentIndexer
   end
 
   def upload_mysql_rows
-    @mysql_client.query("SELECT * FROM message LIMIT 20").each do |row|
+    @mysql_client.query("SELECT * FROM message LIMIT 200000").each do |row|
       @elastic_client.index(
         index: 'enron',
         type: 'email',

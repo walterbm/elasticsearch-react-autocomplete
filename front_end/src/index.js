@@ -1,6 +1,5 @@
 // Styling
 require('./style.scss');
-require('./awesomplete.css');
 
 // JavaScript libraries
 import React from 'react';

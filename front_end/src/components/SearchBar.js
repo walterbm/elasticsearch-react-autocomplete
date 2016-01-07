@@ -98,6 +98,7 @@ export default class SearchBar extends React.Component {
           options={this.state.autocomplete}
           onChange={this.handleQueryChange.bind(this)}
           onOptionSelected={this.handleSelection.bind(this)}
+          maxVisible={20}
           customClasses={{
             typeahead: "topcoat-list",
             input: "topcoat-text-input",

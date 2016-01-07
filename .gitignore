@@ -19,3 +19,7 @@ TODO.md
 
 # Ignore Mac Files
 .DS_Store
+
+# Ignore showoff gem files
+/stats
+/deck/stats
